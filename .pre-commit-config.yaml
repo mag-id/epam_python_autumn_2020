@@ -5,7 +5,8 @@ repos:
   - id: black
     name: black
     description: "Black: The uncompromising Python code formatter"
-    entry: black --check
+    entry: black
+    args: ['--check']
     language: python
     language_version: python3
     require_serial: true
@@ -15,11 +16,15 @@ repos:
   hooks:
   - id: isort
     name: isort
-    entry: isort --profile black --check
+    entry: isort
+    args: [
+      '--profile',
+      'black',
+      '--check'
+    ]
     require_serial: true
     language: python
     types: [python]
-    args: ['--filter-files']
 
 - repo: local
   hooks:

@@ -6,7 +6,8 @@
     "python.formatting.provider": "black",
     "python.sortImports.args": [
         "--profile",
-        "black"
+        "black",
+        "--check"
     ],
     "editor.formatOnSave": true,
     "editor.codeActionsOnSave": {
