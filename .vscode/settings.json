@@ -5,8 +5,8 @@
     "python.linting.pylintEnabled": true,
     "python.formatting.provider": "black",
     "python.sortImports.args": [
-        "--recursive",
-        "-sp isrot.cfg"
+        "--profile",
+        "black"
     ],
     "editor.formatOnSave": true,
     "editor.codeActionsOnSave": {
