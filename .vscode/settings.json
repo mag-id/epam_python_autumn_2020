@@ -6,11 +6,10 @@
     "python.formatting.provider": "black",
     "python.sortImports.args": [
         "--profile",
-        "black",
-        "--check"
+        "black"
     ],
     "editor.formatOnSave": true,
     "editor.codeActionsOnSave": {
-        "source.organizeImports": true
+        "source.organizeImports": false
     }
 }
