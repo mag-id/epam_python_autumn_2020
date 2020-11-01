@@ -5,7 +5,7 @@
     "python.linting.pylintEnabled": true,
     "python.formatting.provider": "black",
     "python.sortImports.args": [
-        "-rc",
+        "--recursive",
         "-sp isrot.cfg"
     ],
     "editor.formatOnSave": true,
