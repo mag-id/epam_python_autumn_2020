@@ -10,6 +10,6 @@
 
 **Note**: as we said, any hw, which does not pass `isort --profile black --check` and `black --check`, will be rejected.
 
-**Updated**
+**Personal updates and improvements**
 + Pylint also was added.
 + `homework1` renamed to `homework_1`.
