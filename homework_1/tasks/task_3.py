@@ -17,4 +17,13 @@ from typing import Tuple
 
 
 def find_maximum_and_minimum(file_name: str) -> Tuple[int, int]:
-    ...
+    """
+    Returns tuple with the min and max `int` from `file_name`.
+
+    Requirements:
+    -------------
+    `file_name` should exist and contains line-delimited integers.
+    """
+    with open(file=file_name, mode="rt") as file:
+        numbers = [int(line.strip()) for line in file]
+    return min(numbers), max(numbers)
