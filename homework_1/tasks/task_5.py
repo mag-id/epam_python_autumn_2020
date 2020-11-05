@@ -12,5 +12,35 @@ Examples:
 from typing import List
 
 
-def find_maximal_subarray_sum(nums: List[int], k: int) -> int:
-    ...
+def find_maximal_subarray_sum(array: List[int], max_subarray_length: int) -> int:
+    """
+    Returns maximal sum of subarray with length <= `max_subarray_length` from `array`.
+    Based on [Kadane's algorithm](https://en.wikipedia.org/wiki/Maximum_subarray_problem).
+    """
+
+    if not array:
+        raise IndexError("len(array) must be > 0.")
+
+    if max_subarray_length <= 0:
+        raise ValueError("max_subarray_length must be > 0.")
+
+    best_sum = current_sum = float("-inf")
+    for current_end, value in enumerate(array):
+
+        if current_sum <= 0:  # Start a new sequence at the current value.
+            current_start = current_end
+            current_sum = value
+        else:  # Extend the existing sequence with the current value.
+            current_sum += value
+
+            # It is work as a queue:
+            if (
+                current_end - current_start == max_subarray_length
+            ):  # if queue overflowed,
+                current_sum -= array[current_start]  # remove the first value,
+                current_start += 1  # reassign the first value.
+
+        if current_sum > best_sum:
+            best_sum = current_sum
+
+    return best_sum
