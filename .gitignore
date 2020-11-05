@@ -1,3 +1,6 @@
+# cache
+.pytest_cache
+
 # homework_1
 homework_1/__pycache__
 homework_1/sample_project/__pycache__
