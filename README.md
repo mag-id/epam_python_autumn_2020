@@ -1,32 +1,26 @@
 # Python Autumn 2020
 
 ## Description
-Individual homework tasks and project for EPAM Autumn 2020 Python Course.
+Individual homework tasks for EPAM Autumn 2020 Python Course.
+
+## Versions
+Python 3.8.6
 
 ## Structure
-```
-epam_python_autumn_2020/  # root
-|
-|-> homework_01/  # Enumarated homework modules
-|   |-> __init__.py
-|   |
-|   |-> tasks  # tasks submodule
-|   |   |-> __init__.py
-|   |   |-> task_01.py  # Enumarated tasks .py files
-|   |
-|   |-> tests  # tests submodule
-|   |   |-> __init__.py
-|   |   | -> test_01.py  # Enumarated tests .py files
-|   |
-|   |-> requirements.txt
-|
-|-> project_name/  # Project module
-|   |-> __init__.py
-|   |-> requirements.txt
-|
-|-> .gitignore
-|-> .vscode
-|-> LICENSE.txt
-|-> README.md
-|-> requirements.txt
-```
+* `homework_1 module`
+
+    * `sample_project` submodule
+        * `calculator` submodule - `calc.py`
+        * `tests` submodule - `test_calculator.py`
+    
+    * `tasks` submodule - `task_1.md`, `task_2.py`, `task_3.py`, `task_4.py`, `task_5.py`
+    * `tests` submodule - `test_1.md`, `test_2.py`, `test_3.py`, `test_4.py`, `test_5.py`
+    * `requirements.txt`
+
+* `.vscode`
+    * `settings.json`
+
+* `.gitignore`
+* `.pre-commit-config.yaml`
+* `LICENSE.txt`
+* `README.md`
