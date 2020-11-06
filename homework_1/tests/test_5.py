@@ -6,30 +6,57 @@ from typing import List
 
 import pytest
 
-from homework_1.tasks.task_5 import find_maximal_subarray_sum
+from homework_1.tasks.task_5 import (
+    INDEX_ERROR_TEXT,
+    VALUE_ERROR_TEXT,
+    find_maximal_subarray_sum,
+)
 
 
 @pytest.mark.parametrize(
-    ["array", "max_subarray_length", "expected_result"],
+    ["array", "max_subarray_length", "expected_exception", "expected_message"],
     [
         pytest.param(
             [],
             0,
-            "IndexError",
+            IndexError,
+            INDEX_ERROR_TEXT,
             id="False case: array=[] and max_subarray_length=0 raises IndexError.",
         ),
         pytest.param(
             [1],
             0,
-            "ValueError",
+            ValueError,
+            VALUE_ERROR_TEXT,
             id="False case: array=[1] and max_subarray_length=0 raises ValueError.",
         ),
         pytest.param(
             [],
             3,
-            "IndexError",
+            IndexError,
+            INDEX_ERROR_TEXT,
             id="False case: array=[] and max_subarray_length=3 raises IndexError.",
         ),
+    ],
+)
+def test_exceptions_in_find_maximal_subarray_sum(
+    array: List[int],
+    max_subarray_length: int,
+    expected_exception: Exception,
+    expected_message: str,
+):
+    """
+    Passes test if `find_maximal_subarray_sum`(`array`, `max_subarray_length`)
+    raises `expected_exception` with `expected_message`.
+    """
+    with pytest.raises(expected_exception) as exception_info:
+        find_maximal_subarray_sum(array, max_subarray_length)
+    assert str(exception_info.value) == expected_message
+
+
+@pytest.mark.parametrize(
+    ["array", "max_subarray_length", "expected_result"],
+    [
         pytest.param(
             [1],
             1,
@@ -93,12 +120,4 @@ def test_find_maximal_subarray_sum(
     Passes test if `find_maximal_subarray_sum`(`array`, `max_subarray_length`)
     is equal to `expected_result`.
     """
-    actual_result = None
-    try:
-        actual_result = find_maximal_subarray_sum(array, max_subarray_length)
-    except IndexError:
-        actual_result = "IndexError"
-    except ValueError:
-        actual_result = "ValueError"
-    finally:
-        assert actual_result == expected_result
+    assert find_maximal_subarray_sum(array, max_subarray_length) == expected_result
