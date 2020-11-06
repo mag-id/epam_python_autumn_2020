@@ -30,21 +30,20 @@ def find_maximal_subarray_sum(array: List[int], max_subarray_length: int) -> int
     if max_subarray_length <= 0:
         raise ValueError(VALUE_ERROR_TEXT)
 
-    best_sum = current_sum = float("-inf")
-    for current_end, value in enumerate(array):
+    best_sum = float("-inf")
+    current_sum = 0
 
-        if current_sum <= 0:  # Start a new sequence at the current value.
-            current_start = current_end
+    for end, value in enumerate(array):
+
+        if current_sum <= 0:
             current_sum = value
-        else:  # Extend the existing sequence with the current value.
+            start = end
+        else:
             current_sum += value
 
-            # It is work as a queue:
-            if (
-                current_end - current_start == max_subarray_length
-            ):  # if queue overflowed,
-                current_sum -= array[current_start]  # remove the first value,
-                current_start += 1  # reassign the first value.
+        if end - start == max_subarray_length:
+            current_sum -= array[start]
+            start += 1
 
         if current_sum > best_sum:
             best_sum = current_sum
