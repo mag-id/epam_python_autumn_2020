@@ -11,6 +11,9 @@ Examples:
 """
 from typing import List
 
+INDEX_ERROR_TEXT = "Length of the input list must be > 0."
+VALUE_ERROR_TEXT = "Maximal subarray length must be > 0."
+
 
 def find_maximal_subarray_sum(array: List[int], max_subarray_length: int) -> int:
     """
@@ -19,10 +22,10 @@ def find_maximal_subarray_sum(array: List[int], max_subarray_length: int) -> int
     """
 
     if not array:
-        raise IndexError("len(array) must be > 0.")
+        raise IndexError(INDEX_ERROR_TEXT)
 
     if max_subarray_length <= 0:
-        raise ValueError("max_subarray_length must be > 0.")
+        raise ValueError(VALUE_ERROR_TEXT)
 
     best_sum = current_sum = float("-inf")
     for current_end, value in enumerate(array):
