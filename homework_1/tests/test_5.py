@@ -111,6 +111,18 @@ def test_exceptions_in_find_maximal_subarray_sum(
             60,
             id="True case: array=[1, 3, -1, -3, 50, -3, 6, 7], max_subarray_length=10 returns 60.",
         ),
+        pytest.param(
+            [-2, 1, -3, 4, -1, 2, 1, -5, 4],
+            3,
+            5,
+            id="True case: array=[-2, 1, -3, 4, -1, 2, 1, -5, 4], max_subarray_length=3 returns 5.",
+        ),
+        pytest.param(
+            [-3, -4, -3, -1, -1, -3, -4],
+            3,
+            -1,
+            id="True case: array=[-3, -4, -3, -1, -1, -3, -4], max_subarray_length=3 returns -1.",
+        ),
     ],
 )
 def test_find_maximal_subarray_sum(
