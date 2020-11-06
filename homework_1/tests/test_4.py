@@ -64,7 +64,4 @@ def test_check_sum_of_four(four_values: List[List[int]], expected_result: int):
     Passes test if `check_sum_of_four`(`*four_values`) is equal to `expected_result`.
     """
     a_values, b_values, c_values, d_values = four_values
-
-    actual_result = check_sum_of_four(a_values, b_values, c_values, d_values)
-
-    assert actual_result == expected_result
+    assert check_sum_of_four(a_values, b_values, c_values, d_values) == expected_result

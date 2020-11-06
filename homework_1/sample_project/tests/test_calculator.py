@@ -62,6 +62,4 @@ def test_power_of_2(value: int, expected_result: bool):
     Passes test if `check_power_of_2`(`value`)
     is equal to `expected_result`.
     """
-    actual_result = check_power_of_2(value)
-
-    assert actual_result == expected_result
+    assert check_power_of_2(value) == expected_result

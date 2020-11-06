@@ -41,6 +41,4 @@ def test_find_maximum_and_minimum(file_content: str, expected_result: Tuple[int,
     with NamedTemporaryFile(mode="wt") as file:
         file.write(file_content)
         file.seek(0)
-        actual_result = find_maximum_and_minimum(file.name)
-
-    assert actual_result == expected_result
+        assert find_maximum_and_minimum(file.name) == expected_result

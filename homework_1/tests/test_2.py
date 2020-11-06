@@ -64,6 +64,4 @@ def test_check_fibonacci(data: Sequence[int], expected_result: bool):
     Passes test if `check_fibonacci`(`data`)
     is equal to `expected_result`.
     """
-    actual_result = check_fibonacci(data)
-
-    assert actual_result == expected_result
+    assert check_fibonacci(data) == expected_result
