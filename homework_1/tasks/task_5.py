@@ -19,6 +19,9 @@ def find_maximal_subarray_sum(array: List[int], max_subarray_length: int) -> int
     """
     Returns maximal sum of subarray with length <= `max_subarray_length` from `array`.
     Based on [Kadane's algorithm](https://en.wikipedia.org/wiki/Maximum_subarray_problem).
+
+    If len(`array`) <= 0 - `IndexError` will raise.
+    If `max_subarray_length` <= 0 - `ValueError` will raise.
     """
 
     if not array:
