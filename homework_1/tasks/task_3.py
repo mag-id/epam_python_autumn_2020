@@ -24,6 +24,19 @@ def find_maximum_and_minimum(file_name: str) -> Tuple[int, int]:
     -------------
     `file_name` should exist and contains line-delimited integers.
     """
-    with open(file=file_name, mode="rt") as file:
-        numbers = [int(line.strip()) for line in file]
-    return min(numbers), max(numbers)
+    min_number = max_number = None
+    with open(file=file_name, mode="tr") as file:
+
+        for line in file:
+            number = int(line)
+
+            if min_number is None:
+                min_number = max_number = number
+
+            elif number > max_number:
+                max_number = number
+
+            elif number < min_number:
+                min_number = number
+
+    return min_number, max_number
