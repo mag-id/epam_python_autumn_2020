@@ -24,6 +24,16 @@ from homework_1.tasks.task_3 import find_maximum_and_minimum
             id="File content is '1\n2\n3\n4\n5\n', result is (1, 5).",
         ),
         pytest.param(
+            "1\n-2\n3\n-4\n5\n-6\n7\n-8\n9\n-10\n11\n-12\n",
+            (-12, 11),
+            id="File content is '1\n-2\n3\n-4\n5\n-6\n7\n-8\n9\n-10\n11\n-12\n', result: (11,-12).",
+        ),
+        pytest.param(
+            "11\n-12\n3\n-4\n5\n-6\n7\n-8\n9\n-10\n1\n-2\n",
+            (-12, 11),
+            id="File content is '11\n-12\n3\n-4\n5\n-6\n7\n-8\n9\n-10\n1\n-2\n', result: (11,-12).",
+        ),
+        pytest.param(
             "\n".join(str(num) for num in range(0, 667000)),
             (0, 666999),
             id="File content is integers from 0 to 666999 delimited by '\n'.",
