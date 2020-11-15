@@ -1,10 +1,40 @@
 """
 Given a file containing text. Complete using only default collections:
-    1) Find 10 longest words consisting from largest amount of unique symbols
-    2) Find rarest symbol for document
-    3) Count every punctuation char
-    4) Count every non ascii char
-    5) Find most common non ascii char for document
+
+1) Find 10 longest words consisting from largest amount of unique symbols
+
+answer:
+-------
+Souveränitätsansprüche, symbolischsakramentale,
+Kollektivschuldiger, Bevölkerungsabschub,
+unmißverständliche, Werkstättenlandschaft,
+Verwaltungsmaßnahme, Selbstverständlich,
+unverhältnismäßig, Schicksalsfiguren
+
+2) Find rarest symbol for document
+
+answer:
+-------
+'(', ')', 'X', 'Y', 'î', '’', '‹', '›'
+
+3) Count every punctuation char
+
+answer:
+-------
+5475
+
+4) Count every non ascii char
+
+answer:
+-------
+2972
+
+
+5) Find most common non ascii char for document
+
+answer:
+-------
+'ä'
 """
 
 from collections import namedtuple
@@ -159,3 +189,16 @@ def _yield_chars_in_file(path: str, encoding="unicode_escape") -> str:
         for line in text:
             for char in line:
                 yield char
+
+
+if __name__ == "__main__":
+
+    PATH = "homework_2/tasks/data.txt"
+    print(
+        f"1) {get_longest_diverse_words(PATH)}",
+        f"2) {get_rarest_char(PATH)}",
+        f"3) {count_punctuation_chars(PATH)}",
+        f"4) {count_non_ascii_chars(PATH)}",
+        f"5) {get_most_common_non_ascii_char(PATH)}",
+        sep="\n",
+    )
