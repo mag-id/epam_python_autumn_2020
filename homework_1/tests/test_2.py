@@ -23,14 +23,37 @@ from homework_1.tasks.task_2 import check_fibonacci
             id="Boundary case: [0, 1] is the Fibonacci seeds.",
         ),
         pytest.param(
+            [0, 1, 1],
+            True,
+            id="Common case: [0, 1, 1].",
+        ),
+        pytest.param(
+            [0, 1, 1, 2, 3, 5, 8, 13, 21],
+            True,
+            id="Common case: [0, ... 21] is the Fibonacci sequence.",
+        ),
+        pytest.param(
+            (0, 1, 1, 2, 3, 5, 8, 13, 21),
+            True,
+            id="Common case: (0, ... 21) is the Fibonacci sequence.",
+        ),
+    ],
+)
+def test_positive_cases_check_fibonacci(data: Sequence[int], expected_result: bool):
+    """
+    Passes test if `check_fibonacci`(`data`)
+    is equal to `expected_result`.
+    """
+    assert check_fibonacci(data) == expected_result
+
+
+@pytest.mark.parametrize(
+    ["data", "expected_result"],
+    [
+        pytest.param(
             [0, 0, 0],
             False,
             id="False case: [0, 0, 0].",
-        ),
-        pytest.param(
-            [0, 1, 1],
-            True,
-            id="True case: [0, 1, 1].",
         ),
         pytest.param(
             [1, 0, 1],
@@ -47,19 +70,32 @@ from homework_1.tasks.task_2 import check_fibonacci
             False,
             id="False case: [0, 1, 1, 3, 2 ... 21] - Fibonacci invariant is broken.",
         ),
+    ],
+)
+def test_negative_cases_check_fibonacci(data: Sequence[int], expected_result: bool):
+    """
+    Passes test if `check_fibonacci`(`data`)
+    is equal to `expected_result`.
+    """
+    assert check_fibonacci(data) == expected_result
+
+
+@pytest.mark.parametrize(
+    ["data", "expected_result"],
+    [
         pytest.param(
-            [0, 1, 1, 2, 3, 5, 8, 13, 21],
-            True,
-            id="True case: [0, ... 21] is the Fibonacci sequence.",
+            [-8, 5, -3, 2, -1, 1, 0],
+            False,
+            id="Negafibonacci is not implemented.",
         ),
         pytest.param(
-            (0, 1, 1, 2, 3, 5, 8, 13, 21),
-            True,
-            id="True case: (0, ... 21) is the Fibonacci sequence.",
+            [-1, 1, 0, 1],
+            False,
+            id="Negafibonacci-Fibonacci transition is not implemented.",
         ),
     ],
 )
-def test_check_fibonacci(data: Sequence[int], expected_result: bool):
+def test_negafibonacchi_check_fibonacci(data: Sequence[int], expected_result: bool):
     """
     Passes test if `check_fibonacci`(`data`)
     is equal to `expected_result`.
