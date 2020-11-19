@@ -59,7 +59,7 @@ def test_common_true_cases_for_integers(content):
     with NamedTemporaryFile(mode="tw", encoding="utf-8") as file:
         file.write(content)
         file.seek(0)
-        assert read_magic_number(file.name) is True
+        assert read_magic_number(file.name)
 
 
 @pytest.mark.parametrize(
@@ -79,7 +79,7 @@ def test_common_true_cases_for_dot_floats(content):
     with NamedTemporaryFile(mode="tw", encoding="utf-8") as file:
         file.write(content)
         file.seek(0)
-        assert read_magic_number(file.name) is True
+        assert read_magic_number(file.name)
 
 
 @pytest.mark.parametrize(
@@ -99,7 +99,7 @@ def test_common_true_cases_for_comma_floats(content):
     with NamedTemporaryFile(mode="tw", encoding="utf-8") as file:
         file.write(content)
         file.seek(0)
-        assert read_magic_number(file.name) is True
+        assert read_magic_number(file.name)
 
 
 @pytest.mark.parametrize(
