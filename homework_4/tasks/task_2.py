@@ -40,4 +40,5 @@ def count_dots_on_i(url: str) -> int:
         html = urlopen(url).read()
         return str(html).count("i")
     except URLError as any_network_error:
+        # https://stackoverflow.com/questions/24752395/python-raise-from-usage
         raise ValueError(f"Unreachable {url}") from any_network_error
