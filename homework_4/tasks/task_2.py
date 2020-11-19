@@ -20,8 +20,10 @@ You will learn:
  - do a simple network requests
 
 ```
+
 >>> count_dots_on_i("https://example.com/")
-    59
+59
+
 ```
 * https://docs.python.org/3/library/urllib.request.html#urllib.request.urlopen
 """

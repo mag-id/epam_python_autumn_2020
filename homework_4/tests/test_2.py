@@ -2,10 +2,11 @@
 Unit tests for module `homework_4.tasks.task_2`.
 """
 from unittest.mock import Mock, patch
+from urllib.request import URLError
 
 import pytest
 
-from homework_4.tasks.task_2 import URLError, count_dots_on_i
+from homework_4.tasks.task_2 import count_dots_on_i
 
 URL = "https://example.com/"
 I_NUMBER = 59
