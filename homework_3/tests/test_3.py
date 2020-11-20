@@ -50,7 +50,7 @@ class TestFilter:
 
     @staticmethod
     @pytest.mark.parametrize(
-        ["functions", "expected_result"],
+        ["functions"],
         [
             pytest.param(
                 (
@@ -58,7 +58,6 @@ class TestFilter:
                     lambda a: a > 0,
                     lambda a: isinstance(a, int),
                 ),
-                True,
                 id="Positive: the instance of Filter class is created.",
             ),
             pytest.param(
@@ -67,19 +66,17 @@ class TestFilter:
                     lambda a: a > 0,
                     lambda a: a % 2 == 0,
                 ),
-                True,
                 id="Positive: the instance of Filter class is created.",
             ),
             pytest.param(
                 (lambda a: a % 2 == 0,),
-                True,
                 id="Positive: the instance of Filter class is created.",
             ),
         ],
     )
-    def test_positive_initialization(functions: Tuple[Callable], expected_result: bool):
+    def test_positive_initialization(functions: Tuple[Callable]):
         """Passes test if the instance of the `Filter` class is created."""
-        assert isinstance(Filter(*functions), Filter) == expected_result
+        assert isinstance(Filter(*functions), Filter)
 
     @staticmethod
     @pytest.mark.parametrize(
