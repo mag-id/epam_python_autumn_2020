@@ -73,7 +73,7 @@ def count_punctuation_chars(file_path: str, encoding="unicode_escape") -> int:
     return sum(
         _count(
             _yield_chars_in_file(file_path, encoding),
-            add_if=lambda value: category(value).startswith("P"),
+            filter_=lambda value: category(value).startswith("P"),
         ).values()
     )
 
@@ -86,7 +86,7 @@ def count_non_ascii_chars(file_path: str, encoding="unicode_escape") -> int:
     return sum(
         _count(
             _yield_chars_in_file(file_path, encoding),
-            add_if=lambda value: not value.isascii(),
+            filter_=lambda value: not value.isascii(),
         ).values()
     )
 
@@ -110,23 +110,23 @@ def get_most_common_non_ascii_char(
     """
     counted = _count(
         _yield_chars_in_file(file_path, encoding),
-        add_if=lambda value: not value.isascii(),
+        filter_=lambda value: not value.isascii(),
     )
     grouped = _switch_keys_and_values(counted)
     return sorted(grouped[max(grouped)])
 
 
 def _count(
-    values: Iterable[Hashable], add_if: Callable = lambda value: True
+    values: Iterable[Hashable], filter_: Callable = lambda value: True
 ) -> Dict[Hashable, int]:
     """
     Returns dictionary where keys are unique `values` and values
     there are entry counters. Adding condition can be specified by
-    `add_if` argument which `lambda value: True` by default.
+    `filter_` argument which `lambda value: True` by default.
     """
     counted = {}
     for value in values:
-        if add_if(value):
+        if filter_(value):
             if value in counted:
                 counted[value] += 1
             else:
