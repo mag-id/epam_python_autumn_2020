@@ -29,11 +29,13 @@ def combinations(*args: List[Any]) -> List[List]:
     -----
     If any `[]` in `*args` then `[]` will be returned:
     ```
+
     >>> combinations([], [])
     []
 
     >>> combinations([1, 2], [], [3])
     []
+
     ```
     """
     return [list(combination) for combination in product(*args)]
