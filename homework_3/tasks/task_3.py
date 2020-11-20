@@ -20,7 +20,7 @@ Description:
 # pylint: disable=too-few-public-methods
 
 from inspect import signature
-from typing import Any, Callable, Dict, List
+from typing import Any, Callable, Dict, List, Tuple
 
 SAMPLE_DATA = [
     {
@@ -45,7 +45,7 @@ class Filter:
     + `apply`
     """
 
-    def __init__(self, functions: List[Callable]):
+    def __init__(self, *functions: Callable):
         # Encapsulated: self.functions = functions
         self.__functions = self.__check_arguments(functions)
 
@@ -60,7 +60,7 @@ class Filter:
 
     # Added: __check_arguments
     @staticmethod
-    def __check_arguments(functions: List[Callable]) -> List[Callable]:
+    def __check_arguments(functions: Tuple[Callable]) -> Tuple[Callable]:
         """
         Returns functions if they are single-argument,
         else raises ValueError('Functions must have a single argument.').
@@ -76,7 +76,7 @@ def make_filter(**keywords: Dict[str, Any]) -> List[Dict[str, Any]]:
     Generate filter a object for specified keywords.
     """
     return Filter(
-        [
+        *[
             lambda entry: entry[key] == word if key in entry else False
             for key, word in keywords.items()
         ]

@@ -4,7 +4,7 @@ Unit tests for module `homework_3.tasks.task_3`.
 
 # pylint: disable=redefined-outer-name
 
-from typing import Any, Callable, Dict, List
+from typing import Any, Callable, Dict, List, Tuple
 
 import pytest
 
@@ -18,11 +18,9 @@ def good_instance():
     correct order of the functions.
     """
     return Filter(
-        [
-            lambda a: isinstance(a, int),
-            lambda a: a % 2 == 0,
-            lambda a: a > 0,
-        ]
+        lambda a: isinstance(a, int),
+        lambda a: a % 2 == 0,
+        lambda a: a > 0,
     )
 
 
@@ -31,7 +29,7 @@ def empty_instance():
     """
     Returns `Filter` instance with no functions.
     """
-    return Filter([])
+    return Filter()
 
 
 @pytest.fixture()
@@ -40,7 +38,11 @@ def bad_instance():
     Returns `Filter` instance with
     wrong order of the functions.
     """
-    return Filter([lambda a: a % 2 == 0, lambda a: a > 0, lambda a: isinstance(a, int)])
+    return Filter(
+        lambda a: a % 2 == 0,
+        lambda a: a > 0,
+        lambda a: isinstance(a, int),
+    )
 
 
 class TestFilter:
@@ -51,54 +53,52 @@ class TestFilter:
         ["functions", "expected_result"],
         [
             pytest.param(
-                [
+                (
                     lambda a: a % 2 == 0,
                     lambda a: a > 0,
                     lambda a: isinstance(a, int),
-                ],
+                ),
                 True,
                 id="Positive: the instance of Filter class is created.",
             ),
             pytest.param(
-                [
+                (
                     lambda a: isinstance(a, int),
                     lambda a: a > 0,
                     lambda a: a % 2 == 0,
-                ],
+                ),
                 True,
                 id="Positive: the instance of Filter class is created.",
             ),
             pytest.param(
-                [
-                    lambda a: a % 2 == 0,
-                ],
+                (lambda a: a % 2 == 0,),
                 True,
                 id="Positive: the instance of Filter class is created.",
             ),
         ],
     )
-    def test_positive_initialization(functions: List[Callable], expected_result: bool):
+    def test_positive_initialization(functions: Tuple[Callable], expected_result: bool):
         """Passes test if the instance of the `Filter` class is created."""
-        assert isinstance(Filter(functions), Filter) == expected_result
+        assert isinstance(Filter(*functions), Filter) == expected_result
 
     @staticmethod
     @pytest.mark.parametrize(
         ["functions", "expected_exception", "expected_message"],
         [
             pytest.param(
-                [
+                (
                     lambda: True,
                     lambda: False,
-                ],
+                ),
                 ValueError,
                 NON_VALID_VALUE,
                 id="Negative: functions without arguments.",
             ),
             pytest.param(
-                [
+                (
                     lambda a, b: a == b,
                     lambda a, b: a == b,
-                ],
+                ),
                 ValueError,
                 NON_VALID_VALUE,
                 id="Negative: functions with multiple arguments.",
@@ -106,11 +106,11 @@ class TestFilter:
         ],
     )
     def test_negative_initialization(
-        functions: List[Callable], expected_exception: Exception, expected_message: str
+        functions: Tuple[Callable], expected_exception: Exception, expected_message: str
     ):
         """Passes test if the `expected_exception` raises with `expected_message`."""
         with pytest.raises(expected_exception) as exception_info:
-            Filter(functions)
+            Filter(*functions)
         assert str(exception_info.value) == expected_message
 
     @staticmethod
