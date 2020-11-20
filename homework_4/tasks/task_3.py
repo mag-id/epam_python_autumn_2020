@@ -4,16 +4,12 @@ if line starts with "error" and to the stdout otherwise.
 
 ```
 
+# stderr - error: file not found
 >>> my_precious_logger("error: file not found")
-# stderr
-'error: file not found'
 
-```
-```
-
->>> my_precious_logger("OK")
 # stdout
-'OK'
+>>> my_precious_logger("OK")
+OK
 
 ```
 
