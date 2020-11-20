@@ -38,19 +38,20 @@ answer:
 """
 
 from collections import namedtuple
-from typing import Callable, Dict, Hashable, Iterable, List
+from typing import Callable, Dict, Hashable, Iterable, Iterator, List
 from unicodedata import category
 
 
-def get_longest_diverse_words(file_path: str) -> List[str]:
+def get_longest_diverse_words(file_path: str, encoding="unicode_escape") -> List[str]:
     """
     Returns from `file_path` the list with first 10 longest words
     consisting of the largest amount of unique symbols in descending order.
+    Default `encoding` is `"unicode_escape"`.
     """
     Word = namedtuple("Word", ["char_counter", "len_counter", "string"])
     top_ten_word = set()
 
-    for word in _yield_words_in_file(file_path):
+    for word in _yield_words_in_file(file_path, encoding):
         top_ten_word.add(
             Word(
                 char_counter=len(set(list(word))),
@@ -64,45 +65,51 @@ def get_longest_diverse_words(file_path: str) -> List[str]:
     return [word.string for word in sorted(top_ten_word, reverse=True)]
 
 
-def count_punctuation_chars(file_path: str) -> int:
+def count_punctuation_chars(file_path: str, encoding="unicode_escape") -> int:
     """
     Returns the number of punctuation characters in `file_path`.
+    Default `encoding` is `"unicode_escape"`.
     """
     return sum(
         _count(
-            _yield_chars_in_file(file_path),
+            _yield_chars_in_file(file_path, encoding),
             add_if=lambda value: category(value).startswith("P"),
         ).values()
     )
 
 
-def count_non_ascii_chars(file_path: str) -> int:
+def count_non_ascii_chars(file_path: str, encoding="unicode_escape") -> int:
     """
     Returns the number of non-ASCII characters in `file_path`.
+    Default `encoding` is `"unicode_escape"`.
     """
     return sum(
         _count(
-            _yield_chars_in_file(file_path),
+            _yield_chars_in_file(file_path, encoding),
             add_if=lambda value: not value.isascii(),
         ).values()
     )
 
 
-def get_rarest_char(file_path: str) -> List[str]:
+def get_rarest_char(file_path: str, encoding="unicode_escape") -> List[str]:
     """
     Returns the list with the rarest symbols in `file_path`.
+    Default `encoding` is `"unicode_escape"`.
     """
-    counted = _count(_yield_chars_in_file(file_path))
+    counted = _count(_yield_chars_in_file(file_path, encoding))
     grouped = _switch_keys_and_values(counted)
     return sorted(grouped[min(grouped)])
 
 
-def get_most_common_non_ascii_char(file_path: str) -> List[str]:
+def get_most_common_non_ascii_char(
+    file_path: str, encoding="unicode_escape"
+) -> List[str]:
     """
     Returns the list with most common non-ASCII character in `file_path`.
+    Default `encoding` is `"unicode_escape"`.
     """
     counted = _count(
-        _yield_chars_in_file(file_path),
+        _yield_chars_in_file(file_path, encoding),
         add_if=lambda value: not value.isascii(),
     )
     grouped = _switch_keys_and_values(counted)
@@ -143,9 +150,9 @@ def _switch_keys_and_values(
     return value_key
 
 
-def _yield_words_in_file(path: str) -> str:
+def _yield_words_in_file(path: str, encoding="unicode_escape") -> Iterator[str]:
     """
-    Yields words from `path`.
+    Yields words from `path`. Default `encoding` is `"unicode_escape"`.
 
     Tokenization rules:
     -------------------
@@ -156,7 +163,7 @@ def _yield_words_in_file(path: str) -> str:
     buffer = letters = is_cleaned = ""
     space_char, newline_char, dash_char = " ", "\n", "-"
 
-    for char in _yield_chars_in_file(path):
+    for char in _yield_chars_in_file(path, encoding):
 
         if char.isalpha():
 
@@ -181,7 +188,7 @@ def _yield_words_in_file(path: str) -> str:
             buffer += char
 
 
-def _yield_chars_in_file(path: str, encoding="unicode_escape") -> str:
+def _yield_chars_in_file(path: str, encoding="unicode_escape") -> Iterator[str]:
     """
     Yields characters from `path`. Default `encoding` is `"unicode_escape"`.
     """
