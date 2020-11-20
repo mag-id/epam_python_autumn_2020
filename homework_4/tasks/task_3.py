@@ -36,9 +36,3 @@ def my_precious_logger(text: str):
     If `text` starts from "error" then writes it to `stderr` else write it to `stdout`.
     """
     print(text, file=sys.stderr if text.startswith(TRIGGER) else sys.stdout, end="")
-
-
-if __name__ == "__main__":
-    import doctest
-
-    doctest.testmod()
