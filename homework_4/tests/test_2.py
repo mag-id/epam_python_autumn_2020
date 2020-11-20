@@ -1,33 +1,36 @@
 """
 Unit tests for module `homework_4.tasks.task_2`.
 """
-from unittest.mock import Mock, patch
+from unittest.mock import MagicMock
 from urllib.request import URLError
 
 import pytest
 
 from homework_4.tasks.task_2 import count_dots_on_i
 
-URL = "https://example.com/"
-I_NUMBER = 59
+URL = "https://mocked_example.com/"
+CONTENT = b"<html>\n<head>iii</head>\n<body>\niii\n</body>\n</html>"
+I_NUMBER = 6
 
 
-@patch("homework_4.tasks.task_2.urlopen")
-def test_positive_case_count_dots_on_i(mock_urlopen):
+def test_positive_case_count_dots_on_i(monkeypatch):
     """
-    Passes test if `count_dots_on_i(URL)` result is equal to `I_NUMBER`.
+    Passes test if `count_dots_on_i(URL)` result is equal to `I_NUMBER` according to `CONTENT`.
     """
-    mock_read = Mock()
-    mock_read.read.return_value = "i" * I_NUMBER
-    mock_urlopen.return_value = mock_read
+    mocked_urlopen = MagicMock()
+    # https://stackoverflow.com/questions/38199008/python-returns-magicmock-object-instead-of-return-value
+    mocked_urlopen().read.return_value = CONTENT
+    monkeypatch.setattr("homework_4.tasks.task_2.urlopen", mocked_urlopen)
     assert count_dots_on_i(URL) == I_NUMBER
 
 
-@patch("homework_4.tasks.task_2.urlopen")
-def test_negative_case_count_dots_on_i(mock_urlopen):
+def test_negative_case_count_dots_on_i(monkeypatch):
     """
     Passes test if `count_dots_on_i(URL)` raises `ValueError("Unreachable URL")`.
     """
+    monkeypatch.setattr(
+        "homework_4.tasks.task_2.urlopen",
+        MagicMock(side_effect=URLError(404)),
+    )
     with pytest.raises(ValueError, match=f"Unreachable {URL}"):
-        mock_urlopen.side_effect = URLError("any network error")
         count_dots_on_i(URL)
