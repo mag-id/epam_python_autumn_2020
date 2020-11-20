@@ -47,9 +47,3 @@ def fizzbuzz(counter: int) -> Iterator[str]:
         fizz_or_buzz = (not number % 3 and "fizz") or ""  # pylint: disable=R1706
         fizz_or_buzz += (not number % 5 and "buzz") or ""  # pylint: disable=R1706
         yield fizz_or_buzz or str(number)
-
-
-if __name__ == "__main__":
-    import doctest
-
-    doctest.testmod()

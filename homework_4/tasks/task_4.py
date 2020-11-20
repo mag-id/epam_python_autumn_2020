@@ -69,9 +69,3 @@ def fizzbuzz(counter: int) -> List[str]:
         numbers.append(fizz_or_buzz or str(number))
 
     return numbers
-
-
-if __name__ == "__main__":
-    import doctest
-
-    doctest.testmod()
