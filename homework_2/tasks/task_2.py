@@ -20,7 +20,7 @@ Output: 2, 1
 from collections import Counter
 from typing import List, Tuple
 
-ARRAY_LENGTH_MESSAGE = "Length of the array must be > 3."
+ARRAY_LENGTH_MESSAGE = "Length of the array must be >= 3."
 MOST_ELEMENT_MESSAGE = "The most common element is not defined."
 LEAST_ELEMENT_MESSAGE = "The least common element is not defined."
 
