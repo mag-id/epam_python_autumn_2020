@@ -34,7 +34,7 @@ def cache(function: Callable) -> Callable:
         Listens `args`, `kwargs`
         and return an answer.
         """
-        call = f"[{args},{kwargs}]"
+        call = f"[{args},{sorted(kwargs)}]"
 
         if call in cached:
             return cached[call]

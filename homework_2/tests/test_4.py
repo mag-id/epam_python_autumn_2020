@@ -55,3 +55,23 @@ def test_arg_kwarg_and_late_binding_for_cache():
     third_result = function(1)
 
     assert first_result == second_result != third_result
+
+
+def test_kwargs_for_cache():
+    """
+    Passes test if result of
+    `cached_func(kwarg_one=value_one, kwarg_two=value_two)`
+    and
+    `cached_func(kwarg_two=value_two, kwarg_one=value_one)`
+    is same object.
+
+    (Passes test if inner cache (or hash) of `cache` is stable).
+    """
+
+    def mult(first=1, second=1):
+        return first * second
+
+    cached_mult = cache(mult)
+    first_result = cached_mult(first=100, second=200)
+    second_result = cached_mult(second=200, first=100)
+    assert first_result is second_result  # assert id(first_result) == id(second_result)
