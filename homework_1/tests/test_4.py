@@ -99,3 +99,28 @@ def test_check_sum_of_four(
     ) is equal to `expected_result`.
     """
     assert check_sum_of_four(a_values, b_values, c_values, d_values) == expected_result
+
+
+@pytest.mark.parametrize(
+    ["a_values", "b_values", "c_values", "d_values", "expected_result"],
+    [
+        pytest.param(
+            *([range(1000)] * 4),
+            1,
+            id="Extensive case: Number of zero-sum tuples is 1.",
+        ),
+    ],
+)
+def test_extensive_check_sum_of_four(
+    a_values: List[int],
+    b_values: List[int],
+    c_values: List[int],
+    d_values: List[int],
+    expected_result: int,
+):
+    """
+    Passes test if `check_sum_of_four`(
+    `a_values`, `b_values`, `c_values`, `d_values`
+    ) is equal to `expected_result`.
+    """
+    assert check_sum_of_four(a_values, b_values, c_values, d_values) == expected_result
