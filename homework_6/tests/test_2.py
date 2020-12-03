@@ -44,13 +44,13 @@ class TestHomework:
         ["deadline"],
         [
             pytest.param(-1, id="deadline = -1 raises ValueError(DAYS_MESSAGE)"),
-            pytest.param(0, id="deadline = -1 raises ValueError(DAYS_MESSAGE)"),
+            pytest.param(0, id="deadline = 0 raises ValueError(DAYS_MESSAGE)"),
         ],
     )
     def test_negative_initialization(deadline: int):
         """
         Passes test if during `Homework` instance
-        initialization `ValueError` with `DAYS_MESSAGE` occurs.
+        initialization raises `ValueError(DAYS_MESSAGE)`.
         """
         with pytest.raises(ValueError, match=DAYS_MESSAGE):
             Homework(text="some task", deadline=deadline)
