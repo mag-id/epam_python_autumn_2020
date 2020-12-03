@@ -23,10 +23,10 @@ class TestHomework:
     @staticmethod
     def test_positive_initialization():
         """
-        Passes test if `Homework(text="some task", deadline=0)`
+        Passes test if `Homework(text="some task", deadline=1)`
         instance is initialize properly.
         """
-        homework = Homework(text="some task", deadline=0)
+        homework = Homework(text="some task", deadline=1)
         assert isinstance(homework.text, str)
         assert isinstance(homework.deadline, timedelta)
         assert isinstance(homework.created, datetime)
@@ -39,13 +39,13 @@ class TestHomework:
             pytest.param(0, id="0 raises ValueError(Must be > 0)"),
         ],
     )
-    def test_negative_initialization():
+    def test_negative_initialization(deadline):
         """
-        Passes test if during `Homework(text="some task", deadline=deadline)`
-        instance initialization `ValueError` with `DAYS_MESSAGE` occurs.
+        Passes test if during `Homework` instance
+        initialization raises `ValueError(DAYS_MESSAGE)`.
         """
         with pytest.raises(ValueError, match=DAYS_MESSAGE):
-            Homework(text="some task", deadline=-1)
+            Homework(text="some task", deadline=deadline)
 
     @staticmethod
     @pytest.mark.parametrize(

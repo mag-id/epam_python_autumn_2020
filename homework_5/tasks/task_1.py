@@ -116,7 +116,7 @@ class Homework:
         Returns `days` if `days` > 0, else
         raise `ValueError("Must be > 0")`.
         """
-        if days < 0:
+        if days <= 0:
             raise ValueError(DAYS_MESSAGE)
         return days
 
