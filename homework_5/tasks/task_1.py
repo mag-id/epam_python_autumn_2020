@@ -65,7 +65,7 @@ student.do_homework(expired_homework)  # You are late
 from datetime import datetime, timedelta
 
 LATE_MESSAGE = "You are late"
-DAYS_MESSAGE = "Must be >= 0"
+DAYS_MESSAGE = "Must be > 0"
 
 
 class Homework:

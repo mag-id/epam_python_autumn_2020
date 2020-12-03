@@ -32,18 +32,20 @@ class TestHomework:
         assert isinstance(homework.created, datetime)
 
     @staticmethod
+    @pytest.mark.parametrize(
+        ["deadline"],
+        [
+            pytest.param(-1, id="-1 raises ValueError(Must be > 0)"),
+            pytest.param(0, id="0 raises ValueError(Must be > 0)"),
+        ],
+    )
     def test_negative_initialization():
         """
-        Passes test if during `Homework(text="some task", deadline=-1)`
+        Passes test if during `Homework(text="some task", deadline=deadline)`
         instance initialization `ValueError` with `DAYS_MESSAGE` occurs.
         """
         with pytest.raises(ValueError, match=DAYS_MESSAGE):
             Homework(text="some task", deadline=-1)
-
-    @staticmethod
-    def test_is_active_false_zero_deadline():
-        """Passes test if `is_active` returns `False`."""
-        assert Homework("some text", deadline=0).is_active() is False
 
     @staticmethod
     @pytest.mark.parametrize(
@@ -60,9 +62,7 @@ class TestHomework:
 
     @staticmethod
     @pytest.mark.parametrize(
-        [
-            "deadline",
-        ],
+        ["deadline"],
         [
             pytest.param(3, id="True: deadline will be tomorrow."),
             pytest.param(4, id="True: deadline will be after tomorrow."),
