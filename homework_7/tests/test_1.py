@@ -41,7 +41,6 @@ TRICKY_TREE = {
 @pytest.mark.parametrize(
     ["tree", "element", "expected_result"],
     [
-        pytest.param({}, "NO", 0, id="0 'NO' in `{}`"),
         pytest.param(EXAMPLE_TREE, "NO", 0, id="0 'NO' in `EXAMPLE_TREE`"),
         pytest.param(EXAMPLE_TREE, "RED", 6, id="6 'RED' in `EXAMPLE_TREE`"),
         pytest.param(EXAMPLE_TREE, "first", 1, id="1 'first' in `EXAMPLE_TREE`"),
