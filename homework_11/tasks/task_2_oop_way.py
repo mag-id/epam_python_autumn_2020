@@ -36,107 +36,89 @@ assert order_1.final_price() == 10  # Maybe order_2 ?
 """
 
 from abc import ABC
-from typing import Any
 
 # pylint: disable=too-few-public-methods
 
 
-class Strategy(ABC):
+class Discount(ABC):
     """
-    Strategy interface implements `execute`
-    classmethod which execute `Strategy` logic.
-    """
+    Strategy interface.
 
-    @classmethod
-    def execute(cls, *args: Any, **kwargs: Any) -> Any:
-        """
-        Executes `Strategy` logic.
-        """
-        raise NotImplementedError
-
-
-class Context:
-    """
-    Creates instance with next methods:
-    + `set_strategy` - for setting `strategy` to the `Context`
-    + `execute_strategy` - for executing `strategy` logic
+    Implements `calculate` staticmethod for logic executing.
     """
 
-    def __init__(self):
-        self.__strategy = None
-
-    def set_strategy(self, strategy: Strategy):
+    @staticmethod
+    def calculate(order: "Order", percentage: float) -> int:
         """
-        Sets `strategy` to the `Context`.
+        Returns final price of the `order`
+        according to current `percentage`.
         """
-        self.__strategy = strategy
-
-    def execute_strategy(self, *args: Any, **kwargs: Any) -> Any:
-        """
-        Executes current `strategy` logic in current `Context`.
-        """
-        return self.__strategy.execute(*args, **kwargs)
+        return int(order.price - order.price * percentage)
 
 
-# pylint: disable=arguments-differ
-
-
-class MorningDiscount(Strategy):
+class MorningDiscount:
     """
     `MorningDiscount` is 50%.
     """
 
-    __discount = 0.5
-
-    @classmethod
-    def execute(cls, price: int) -> int:
+    @staticmethod
+    def calculate(order: "Order") -> int:
         """
-        Returns new `price` according `MorningDiscount`: 50%.
+        Returns final price of the
+        `order` with a 50% discount.
         """
-        return int(price - price * cls.__discount)
+        return Discount.calculate(order, 0.5)
 
 
-class ElderDiscount(Strategy):
+class ElderDiscount:
     """
     `ElderDiscount` is 90%.
     """
 
-    __discount = 0.9
-
-    @classmethod
-    def execute(cls, price: int) -> int:
+    @staticmethod
+    def calculate(order: "Order") -> int:
         """
-        Returns new `price` according `ElderDiscount`: 90%
+        Returns final price of the
+        `order` with a 90% discount.
         """
-        return int(price - price * cls.__discount)
+        return Discount.calculate(order, 0.9)
 
 
 class Order:
     """
-    Creates an instance with `price` and `discount`
-    and implements `final_price` method.
+    Context class.
+
+    Takes `price` and `discount`.
+    Implements `final_price` method.
 
     Example:
     --------
     ```
+    >>> morning_discount = MorningDiscount()
+    >>> elder_discount = ElderDiscount()
 
-    >>> order_1 = Order(100, MorningDiscount)
+    >>> order_1 = Order(100, morning_discount)
     >>> assert order_1.final_price() == 50
 
-    >>> order_2 = Order(100, ElderDiscount)
+    >>> order_2 = Order(100, elder_discount)
     >>> assert order_2.final_price() == 10
 
     ```
     """
 
-    def __init__(self, price: int, discount: Strategy):
+    def __init__(self, price: int, discount: Discount):
         self.__price = price
+        self.__discount = discount
 
-        self.__context = Context()
-        self.__context.set_strategy(discount)
+    @property
+    def price(self) -> int:
+        """
+        Returns initial `price`.
+        """
+        return self.__price
 
-    def final_price(self) -> Any:
+    def final_price(self) -> int:
         """
-        Returns final `price` of the `Order`.
+        Returns final price of the current `Order`.
         """
-        return self.__context.execute_strategy(self.__price)
+        return self.__discount.calculate(self)
