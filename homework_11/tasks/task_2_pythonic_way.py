@@ -35,13 +35,15 @@ order_2 = Order(100, elder_discount)
 assert order_1.final_price() == 10  # Maybe order_2 ?
 """
 
-from typing import Any, Callable
+from typing import Callable
 
 
 class Order:
     """
-    Creates an instance with `price` and `discount`
-    and implements `final_price` method.
+    Context class.
+
+    Takes `price` and `discount`.
+    Implements `final_price` method.
 
     Example:
     --------
@@ -63,18 +65,18 @@ class Order:
     @property
     def price(self) -> int:
         """
-        Returns `price`.
+        Returns initial `price`.
         """
         return self.__price
 
-    def final_price(self) -> Any:
+    def final_price(self) -> int:
         """
-        Returns final `price` of the `Order`.
+        Returns final price of the current `Order`.
         """
         return self.__discount(self)
 
 
-def _discount(order: Order, percentage: float) -> int:
+def calculate_discount(order: Order, percentage: float) -> int:
     """
     Returns final price of the `order`
     according to current `percentage`.
@@ -84,13 +86,15 @@ def _discount(order: Order, percentage: float) -> int:
 
 def morning_discount(order: Order) -> int:
     """
-    Returns final price of the `order` with 50% `_discount`.
+    Returns final price of the
+    `order` with a 50% discount.
     """
-    return _discount(order, 0.5)
+    return calculate_discount(order, 0.5)
 
 
 def elder_discount(order: Order) -> int:
     """
-    Returns final price of the `order` with 90% `_discount`.
+    Returns final price of the
+    `order` with a 90% discount.
     """
-    return _discount(order, 0.9)
+    return calculate_discount(order, 0.9)
