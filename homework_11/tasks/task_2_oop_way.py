@@ -52,7 +52,7 @@ class Strategy(ABC):
         """
         Executes `Strategy` logic.
         """
-        raise NotADirectoryError
+        raise NotImplementedError
 
 
 class Context:
