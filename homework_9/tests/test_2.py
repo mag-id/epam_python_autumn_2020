@@ -6,7 +6,7 @@ from homework_9.tasks.task_2 import Supressor, supressor
 
 # https://stackoverflow.com/questions/26266481
 @pytest.fixture(params=[Supressor, supressor])
-def implementation(request):
+def suppressor_implementation(request):
     """
     Returns `Supressor` and `supressor` implementations.
     """
