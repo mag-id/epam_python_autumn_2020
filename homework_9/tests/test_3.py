@@ -4,7 +4,6 @@ from module `homework_9.tasks.task_3`.
 """
 
 from pathlib import Path
-from typing import Callable
 
 import pytest
 
@@ -67,21 +66,19 @@ def test_no_tokenizer(test_files, file_extension: str, expected_result: int):
 
 
 @pytest.mark.parametrize(
-    ["file_extension", "tokenizer", "expected_result"],
+    ["file_extension", "expected_result"],
     [
-        pytest.param("txt", lambda line: line.split(), 9),
-        pytest.param("py", lambda line: line.split(), 0),
-        pytest.param(".txt", lambda line: line.split(), 9),
-        pytest.param(".py", lambda line: line.split(), 0),
+        pytest.param("txt", 9),
+        pytest.param("py", 0),
+        pytest.param(".txt", 9),
+        pytest.param(".py", 0),
     ],
 )
-def test_with_tokenizer(
-    test_files, file_extension: str, tokenizer: Callable, expected_result: int
-):
+def test_with_tokenizer(test_files, file_extension: str, expected_result: int):
     """
-    Passes test if result with `tokenizer` is equal to `expected_result`.
+    Passes test if result with `str.split` `tokenizer` is equal to `expected_result`.
     """
     assert (
-        universal_file_counter(Path(test_files), file_extension, tokenizer)
+        universal_file_counter(Path(test_files), file_extension, str.split)
         == expected_result
     )
