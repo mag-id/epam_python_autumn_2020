@@ -8,85 +8,82 @@ import pytest
 
 from homework_9.tasks.task_1 import merge_sorted_files
 
-ONE_THREE_FIVE_LINES = "1\n3\n5\n"
-TWO_FOUR_SIX_LINES = "2\n4\n6"
-THREE_EMPTY_LINES = "\n\n\n"
-EMPTY = ""
-
-
-@pytest.fixture
-def test_files_creator(tmp_path):
-    """
-    Creates file paths to the:
-
-    + "one_three_five_lines.txt" with `ONE_THREE_FIVE_LINES`
-    + "two_four_six_lines.txt" with `TWO_FOUR_SIX_LINES`
-    + "three_empty_lines.py" with `THREE_EMPTY_LINES`
-    + "empty.py" with `EMPTY`
-    """
-    test_dir = tmp_path / "tmp_dir"
-    test_dir.mkdir()
-
-    one_three_five_lines_txt = test_dir / "one_three_five_lines.txt"
-    two_four_six_lines_txt = test_dir / "two_four_six_lines.txt"
-    three_empty_lines_py = test_dir / "three_empty_lines.py"
-    empty_py = test_dir / "empty.py"
-
-    file_content = {
-        one_three_five_lines_txt: ONE_THREE_FIVE_LINES,
-        two_four_six_lines_txt: TWO_FOUR_SIX_LINES,
-        three_empty_lines_py: THREE_EMPTY_LINES,
-        empty_py: EMPTY,
-    }
-
-    for file, content in file_content.items():
-        file.write_text(content)
-
-    return (
-        one_three_five_lines_txt,
-        two_four_six_lines_txt,
-        three_empty_lines_py,
-        empty_py,
-    )
-
-
 # pylint: disable=redefined-outer-name
 
 
-def test_single_file(test_files_creator):
+@pytest.fixture
+def tmp_dir(tmp_path) -> Path:
+    """
+    Returns `Path` to the temporary directory.
+    If It not exists - creates and returns it.
+    """
+    dir_path = tmp_path / "tmp_dir"
+    if not dir_path.exists():
+        dir_path.mkdir()
+    return dir_path
+
+
+# https://stackoverflow.com/questions/44677426
+@pytest.fixture
+def create_tmp_file(tmp_dir) -> Path:
+    """
+    Writes file at `tmp_dir` with given `name` and `content`.
+
+    Arguments:
+    ----------
+    + `name` - name of the `tmp_file`, `str`.
+    + `content` - content of the `tmp_file`, `str`.
+
+    Returns:
+    --------
+    + `tmp_file` - `Path` to the temporary file.
+    """
+
+    def tmp_file(name: str, content: str) -> Path:
+        """
+        File `Path` from `create_tmp_file`
+        fixture with given `name` and `content`.
+        """
+        file = tmp_dir / name
+        file.write_text(content)
+        return file
+
+    return tmp_file
+
+
+def test_single_file(create_tmp_file):
     """
     Passes test if `merge_sorted_files` works correctly
     on the one sorted file with integers per lines.
     """
-    one_three_five_lines_txt, _, _, _ = test_files_creator
-    assert list(merge_sorted_files([one_three_five_lines_txt])) == [1, 3, 5]
+    _1_3_5_lines_txt = create_tmp_file("1_3_5_lines.txt", "1\n3\n5\n")
+    assert list(merge_sorted_files([_1_3_5_lines_txt])) == [1, 3, 5]
 
 
-def test_multiple_files(test_files_creator):
+def test_multiple_files(create_tmp_file):
     """
     Passes test if `merge_sorted_files` works correctly
     on the sorted files with integers per lines.
     """
-    one_three_five_lines_txt, two_four_six_lines_txt, _, _ = test_files_creator
-    result = merge_sorted_files(
-        [one_three_five_lines_txt, Path(two_four_six_lines_txt)]
-    )
-    assert list(result) == [1, 2, 3, 4, 5, 6]
+    _1_3_5_lines_txt = create_tmp_file("1_3_5_lines.txt", "1\n3\n5\n")
+    _2_4_6_lines_txt = create_tmp_file("2_4_6_lines.txt", "2\n4\n6\n")
+    files = [_1_3_5_lines_txt, Path(_2_4_6_lines_txt)]
+    assert list(merge_sorted_files(files)) == [1, 2, 3, 4, 5, 6]
 
 
-def test_empty_lines_file(test_files_creator):
+def test_empty_lines_file(create_tmp_file):
     """
     Passes test if `merge_sorted_files` yields
     nothing for the file with empty lines.
     """
-    _, _, three_empty_lines_py, _ = test_files_creator
-    assert list(merge_sorted_files([three_empty_lines_py])) == []
+    _3_empty_lines_txt = create_tmp_file("_3_empty_lines.txt", "\n\n\n")
+    assert list(merge_sorted_files([_3_empty_lines_txt])) == []
 
 
-def test_empty_file(test_files_creator):
+def test_empty_file(create_tmp_file):
     """
     Passes test if `merge_sorted_files`
     yields nothing for the empty file.
     """
-    _, _, _, empty_py = test_files_creator
-    assert list(merge_sorted_files([empty_py])) == []
+    empty_txt = create_tmp_file("empty.txt", "")
+    assert list(merge_sorted_files([empty_txt])) == []
