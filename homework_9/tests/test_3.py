@@ -9,44 +9,61 @@ import pytest
 
 from homework_9.tasks.task_3 import universal_file_counter
 
-ONE_LINE_ONE_INTEGER = "1\n2\n3\n"
-ONE_LINE_TWO_INTEGERS = "4 5\n6 7\n 9 10"
-THREE_EMPTY_LINES = "\n\n\n"
-EMPTY = ""
+# pylint: disable=redefined-outer-name
 
 
 @pytest.fixture
-def test_files_creator(tmp_path):
+def tmp_dir(tmp_path) -> Path:
     """
-    Creates temporary direcory with 4 text files:
-
-    + "one_line_one_integer.txt" with `ONE_LINE_ONE_INTEGER`
-    + "one_line_two_integers.txt" with `ONE_LINE_TWO_INTEGERS`
-    + "three_empty_lines.py" with `THREE_EMPTY_LINES`
-    + "empty.py" with `EMPTY`
+    Returns `Path` to the temporary directory.
+    If It not exists - creates and returns it.
     """
-    test_dir = tmp_path / "tmp_dir"
-    test_dir.mkdir()
+    dir_path = tmp_path / "tmp_dir"
+    if not dir_path.exists():
+        dir_path.mkdir()
+    return dir_path
 
-    one_line_one_integer_txt = test_dir / "one_line_one_integer.txt"
-    one_line_two_integers_txt = test_dir / "one_line_two_integers.txt"
-    three_empty_lines_py = test_dir / "three_empty_lines.py"
-    empty_py = test_dir / "empty.py"
 
-    file_content = {
-        one_line_one_integer_txt: ONE_LINE_ONE_INTEGER,
-        one_line_two_integers_txt: ONE_LINE_TWO_INTEGERS,
-        three_empty_lines_py: THREE_EMPTY_LINES,
-        empty_py: EMPTY,
-    }
+# https://stackoverflow.com/questions/44677426
+@pytest.fixture
+def create_tmp_file(tmp_dir) -> Path:
+    """
+    Writes file at `tmp_dir` with given `name` and `content`.
 
-    for file, content in file_content.items():
+    Arguments:
+    ----------
+    + `name` - name of the `tmp_file`, `str`.
+    + `content` - content of the `tmp_file`, `str`.
+
+    Returns:
+    --------
+    + `tmp_file` - `Path` to the temporary file.
+    """
+
+    def tmp_file(name: str, content: str) -> Path:
+        """
+        File `Path` from `create_tmp_file`
+        fixture with given `name` and `content`.
+        """
+        file = tmp_dir / name
         file.write_text(content)
+        return file
 
-    return test_dir
+    return tmp_file
 
 
-# pylint: disable=redefined-outer-name
+@pytest.fixture
+def filled_tmp_dir(create_tmp_file, tmp_dir) -> Path:
+    """
+    Creates files with current `name`s, `content`s
+    at `tmp_dir` and returns `Path` to the `tmp_dir`.
+    """
+    create_tmp_file("1_line_1_integer.txt", "1\n2\n3\n")
+    create_tmp_file("1_line_2_integers.txt", "4 5\n6 7\n 9 10")
+    create_tmp_file("3_empty_lines.py", "\n\n\n")
+    create_tmp_file("empty.py", "")
+
+    return tmp_dir
 
 
 @pytest.mark.parametrize(
@@ -58,14 +75,11 @@ def test_files_creator(tmp_path):
         pytest.param(".py", 3),
     ],
 )
-def test_no_tokenizer(test_files_creator, file_extension: str, expected_result: int):
+def test_no_tokenizer(filled_tmp_dir, file_extension: str, expected_result: int):
     """
     Passes test if result without `tokenizer` is equal to `expected_result`.
     """
-    assert (
-        universal_file_counter(Path(test_files_creator), file_extension)
-        == expected_result
-    )
+    assert universal_file_counter(filled_tmp_dir, file_extension) == expected_result
 
 
 @pytest.mark.parametrize(
@@ -77,11 +91,11 @@ def test_no_tokenizer(test_files_creator, file_extension: str, expected_result: 
         pytest.param(".py", 0),
     ],
 )
-def test_with_tokenizer(test_files_creator, file_extension: str, expected_result: int):
+def test_with_tokenizer(filled_tmp_dir, file_extension: str, expected_result: int):
     """
     Passes test if result with `str.split` `tokenizer` is equal to `expected_result`.
     """
     assert (
-        universal_file_counter(Path(test_files_creator), file_extension, str.split)
+        universal_file_counter(filled_tmp_dir, file_extension, str.split)
         == expected_result
     )
