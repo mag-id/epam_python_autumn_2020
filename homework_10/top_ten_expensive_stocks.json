@@ -1,0 +1,52 @@
+[
+    {
+        "code": "SHW",
+        "name": "Sherwin-Williams Co.",
+        "price": 53312.4
+    },
+    {
+        "code": "BLK",
+        "name": "BlackRock Inc.",
+        "price": 54464.12
+    },
+    {
+        "code": "TSLA",
+        "name": "Tesla",
+        "price": 56126.32
+    },
+    {
+        "code": "ISRG",
+        "name": "Intuitive Surgical Inc",
+        "price": 58338.16
+    },
+    {
+        "code": "MTD",
+        "name": "Mettler-Toledo International Inc.",
+        "price": 87994.82
+    },
+    {
+        "code": "AZO",
+        "name": "AutoZone Inc.",
+        "price": 90687.59
+    },
+    {
+        "code": "CMG",
+        "name": "Chipotle Mexican Grill Inc.",
+        "price": 99069.53
+    },
+    {
+        "code": "GOOGL",
+        "name": "Alphabet A (ex Google)",
+        "price": 127321.81
+    },
+    {
+        "code": "GOOG",
+        "name": "Alphabet C (ex Google)",
+        "price": 127812.35
+    },
+    {
+        "code": "AMZN",
+        "name": "Amazon",
+        "price": 232154.39
+    }
+]

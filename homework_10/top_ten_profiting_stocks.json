@@ -1,0 +1,52 @@
+[
+    {
+        "code": "DVN",
+        "name": "Devon Energy Corp.",
+        "potential profit": 473.83
+    },
+    {
+        "code": "MGM",
+        "name": "MGM Resorts International",
+        "potential profit": 486.54
+    },
+    {
+        "code": "HAL",
+        "name": "Halliburton Co.",
+        "potential profit": 494.12
+    },
+    {
+        "code": "FCX",
+        "name": "Freeport-McMoRan Inc",
+        "potential profit": 531.57
+    },
+    {
+        "code": "OKE",
+        "name": "ONEOK Inc (New)",
+        "potential profit": 545.31
+    },
+    {
+        "code": "CCL",
+        "name": "Carnival Corp & plc paired",
+        "potential profit": 565.83
+    },
+    {
+        "code": "RCL",
+        "name": "Royal Caribbean Cruises Ltd.",
+        "potential profit": 602.08
+    },
+    {
+        "code": "NCLH",
+        "name": "Norwegian Cruise Line Ltd",
+        "potential profit": 750.36
+    },
+    {
+        "code": "APA",
+        "name": "Apache Corp.",
+        "potential profit": 786.35
+    },
+    {
+        "code": "TSLA",
+        "name": "Tesla",
+        "potential profit": 1004.11
+    }
+]
