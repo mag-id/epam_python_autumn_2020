@@ -1,0 +1,52 @@
+[
+    {
+        "profit": 486.54,
+        "name": "MGM Resorts International",
+        "code": "MGM"
+    },
+    {
+        "profit": 503.62,
+        "name": "L Brands Inc",
+        "code": "LB"
+    },
+    {
+        "profit": 545.31,
+        "name": "ONEOK Inc (New)",
+        "code": "OKE"
+    },
+    {
+        "profit": 557.97,
+        "name": "Freeport-McMoRan Inc",
+        "code": "FCX"
+    },
+    {
+        "profit": 565.83,
+        "name": "Carnival Corp & plc paired",
+        "code": "CCL"
+    },
+    {
+        "profit": 602.08,
+        "name": "Royal Caribbean Cruises Ltd.",
+        "code": "RCL"
+    },
+    {
+        "profit": 750.36,
+        "name": "Norwegian Cruise Line Ltd",
+        "code": "NCLH"
+    },
+    {
+        "profit": 786.35,
+        "name": "Apache Corp.",
+        "code": "APA"
+    },
+    {
+        "profit": 934.6,
+        "name": "Enphase Energy Inc",
+        "code": "ENPH"
+    },
+    {
+        "profit": 1161.66,
+        "name": "Tesla",
+        "code": "TSLA"
+    }
+]

@@ -1,0 +1,52 @@
+[
+    {
+        "ratio": 7.73,
+        "name": "Franklin Resources Inc.",
+        "code": "BEN"
+    },
+    {
+        "ratio": 7.59,
+        "name": "General Motors",
+        "code": "GM"
+    },
+    {
+        "ratio": 7.31,
+        "name": "United Airlines Holdings Inc Registered Shs",
+        "code": "UAL"
+    },
+    {
+        "ratio": 7.08,
+        "name": "Invesco Ltd",
+        "code": "IVZ"
+    },
+    {
+        "ratio": 6.23,
+        "name": "Hewlett Packard Enterprise Co.",
+        "code": "HPE"
+    },
+    {
+        "ratio": 5.84,
+        "name": "American Airlines Inc",
+        "code": "AAL"
+    },
+    {
+        "ratio": 5.28,
+        "name": "Unum Group",
+        "code": "UNM"
+    },
+    {
+        "ratio": 2.58,
+        "name": "DXC Technology",
+        "code": "DXC"
+    },
+    {
+        "ratio": -69.69,
+        "name": "Hess Corp",
+        "code": "HES"
+    },
+    {
+        "ratio": -95.58,
+        "name": "Boeing Co.",
+        "code": "BA"
+    }
+]
