@@ -1,10 +1,10 @@
-"""Tools for conversion USD to RUB. Uses the `Parser` from `stocks.interface`."""
+"""Tools for conversion USD to RUB via `Parser` from `stocks.interface`."""
 
 from typing import Callable
 
 from interface import Parser
 
-__all__ = ["SITE", "USD_ID", "usd_to_rub", "get_usd_rub_quotation"]
+__all__ = ["get_usd_rub_quotation", "usd_to_rub"]
 
 SITE = "http://www.cbr.ru/scripts/XML_daily.asp"
 USD_ID = "R01235"
@@ -41,6 +41,6 @@ def get_usd_rub_quotation() -> float:
     """
     return Parser.get_data(
         soup=Parser.get_soup(SITE, parser="lxml-xml"),
-        finding_function=lambda xml: xml.find("Valute", ID=USD_ID).find("Value"),
-        parsing_function=lambda value: float(value.string.replace(",", ".")),
+        filter_=lambda xml: xml.find("Valute", ID=USD_ID).find("Value"),
+        prepare=lambda value: float(value.string.replace(",", ".")),
     )
