@@ -60,3 +60,10 @@ homework_10/test_stocks/test_derivatives/__pycache__
 homework_11/__pycache__
 homework_11/tasks/__pycache__
 homework_11/tests/__pycache__
+
+# homework_12
+homework_12/__pycache__
+homework_12/task/__pycache__
+homework_12/tests/__pycache__
+homework_12/alembic/__pycache__
+homework_12/alembic/versions/__pycache__
