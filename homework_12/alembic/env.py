@@ -17,7 +17,14 @@ fileConfig(config.config_file_name)
 # for 'autogenerate' support
 # from myapp import mymodel
 # target_metadata = mymodel.Base.metadata
-target_metadata = None
+
+# pylint: disable=wrong-import-order, wrong-import-position
+import sys
+
+sys.path.append(".")
+from homework_12.task import main  # pylint: disable=import-error
+
+target_metadata = main.DB.metadata
 
 # other values from the config, defined by the needs of env.py,
 # can be acquired:
