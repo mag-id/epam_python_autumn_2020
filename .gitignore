@@ -1,3 +1,7 @@
+# vscode configs
+.vscode
+.devcontainer.json
+
 # cache
 .pytest_cache
 
