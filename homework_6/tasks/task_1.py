@@ -64,7 +64,8 @@ def instances_counter(cls):
 
     Also, adds two methods:
     + `get_created_instances` - returns number of created instances.
-    + `reset_instances_counter` - returns the number of created instances and set it to `0`.
+    + `reset_instances_counter` - returns the number of created instances
+    and set it to `0`.
     """
 
     class InstancesCounter(cls, CounterMixin):

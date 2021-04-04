@@ -3,7 +3,8 @@ There are multiple bugs in this code. Find them all and write tests for faulty c
 
 Description:
 ------------
-+ I decided to write a code that generates data filtering object from a list of keyword parameters.
++ I decided to write a code that generates data
+filtering object from a list of keyword parameters.
 + Example of usage:
 ```
 > positive_even = Filter(

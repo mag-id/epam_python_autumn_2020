@@ -19,12 +19,12 @@ from homework_2.tasks.task_2 import (
         pytest.param(
             [3, 2, 3],
             (3, 2),
-            id="Common case: 3 is the most and 2 is the least common in [3, 2, 3].",
+            id="3 is the most and 2 is the least common in [3, 2, 3].",
         ),
         pytest.param(
             [2, 2, 1, 1, 1, 2, 2],
             (2, 1),
-            id="Common case: 2 is the most and 1 is the least common in [2, 2, 1, 1, 1, 2, 2].",
+            id="2 is the most and 1 is the least common in [2, 2, 1, 1, 1, 2, 2].",
         ),
     ],
 )
@@ -45,29 +45,29 @@ def test_common_cases_for_major_and_minor_elem(
             [0, 0],
             ValueError,
             ARRAY_LENGTH_MESSAGE,
-            id="ValueError: len([0, 0]) < 3",
+            id="len([0, 0]) < 3",
         ),
         pytest.param(
             [1, 1, 0, 0],
             ValueError,
             MOST_ELEMENT_MESSAGE,
-            id="ValueError: The most common element in [1, 1, 0, 0] can not be defined.",
+            id="The most common element in [1, 1, 0, 0] can not be defined.",
         ),
         pytest.param(
             [0, 0, 0],
             ValueError,
             LEAST_ELEMENT_MESSAGE,
-            id="ValueError: The least common element in [0, 0, 0] can not be defined.",
+            id="The least common element in [0, 0, 0] can not be defined.",
         ),
         pytest.param(
             [1, 1, 1, 2, 3],
             ValueError,
             LEAST_ELEMENT_MESSAGE,
-            id="ValueError: The least common element in [1, 1, 1, 2, 3] can not be defined.",
+            id="The least common element in [1, 1, 1, 2, 3] can not be defined.",
         ),
     ],
 )
-def test_exception_cases_for_major_and_minor_elem(
+def test_value_error_cases_for_major_and_minor_elem(
     array: List[int], expected_exception: Exception, expected_message: str
 ):
     """

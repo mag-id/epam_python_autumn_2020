@@ -1,5 +1,6 @@
 """
-Write down the function, which reads input line-by-line, and find maximum and minimum values.
+Write down the function, which reads input line-by-line,
+and find maximum and minimum values.
 Function should return a tuple with the max and min values.
 
 For example for [1, 2, 3, 4, 5], function should return [1, 5]

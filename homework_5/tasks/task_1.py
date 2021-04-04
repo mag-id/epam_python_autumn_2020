@@ -152,7 +152,9 @@ class Student:
 
     @staticmethod
     def do_homework(homework: Homework) -> Homework or None:
-        """Returns `Homework` if the deadline is ok, else `None` and prints 'You are late'."""
+        """
+        Returns `Homework` if the deadline is ok, else `None` and prints 'You are late'.
+        """
         return homework if homework.is_active() else print(LATE_MESSAGE, end="")
 
 

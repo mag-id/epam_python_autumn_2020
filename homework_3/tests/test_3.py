@@ -229,7 +229,8 @@ def test_positive_make_filter(
     expected_result: List[Dict[str, Any]],
 ):
     """
-    Passes test if for `make_filter(keywords).apply(data)` is equal to `expected_result`.
+    Passes test if for `make_filter(keywords).apply(data)`
+    is equal to `expected_result`.
     """
     assert make_filter(**keywords).apply(data) == expected_result
 
@@ -257,6 +258,7 @@ def test_boundary_make_filter(
     expected_result: List[Dict[str, Any]],
 ):
     """
-    Passes test if for `make_filter(keywords).apply(data)` is equal to `expected_result`.
+    Passes test if for `make_filter(keywords).apply(data)`
+    is equal to `expected_result`.
     """
     assert make_filter(**keywords).apply(data) == expected_result

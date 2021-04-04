@@ -26,8 +26,11 @@ def custom_range(
     step: int = 1,
 ) -> List[Any]:
     """
-    Returns list of values from `unique_values` according to the built-in `range` behaviour.
-    If `start`, `stop`, and `step` are not specified, list of `unique_values` will returned.
+    Returns list of values from `unique_values`
+    according to the built-in `range` behaviour.
+
+    If `start`, `stop`, and `step` are not specified,
+    list of `unique_values` will returned.
     """
     collected = list(unique_values)
 
