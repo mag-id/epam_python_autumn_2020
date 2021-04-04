@@ -2,7 +2,8 @@
 Classic task, a kind of walnut for you
 
 Given four lists A, B, C, D of integer values,
-compute how many tuples (i, j, k, l) there are such that A[i] + B[j] + C[k] + D[l] is zero.
+compute how many tuples (i, j, k, l) there are
+such that A[i] + B[j] + C[k] + D[l] is zero.
 
 We guarantee, that all A, B, C, D have same length of N where 0 ≤ N ≤ 1000.
 """
@@ -20,14 +21,16 @@ def check_sum_of_four(
 
     Requirements:
     -------------
-    `a_values`, `b_values`, `c_values`, `d_values` have same length N, where 0 ≤ N ≤ 1000.
+    `a_values`, `b_values`, `c_values`, `d_values` have same length N,
+    where 0 ≤ N ≤ 1000.
 
     Algorithm:
     ----------
     + Complexity O(N^4) simplified to O(N^2) by getting two arrays
     from all unique combinations in arrays pairs (ab and cd).
     + In the new two arrays, we count a number of identical sums.
-    + For each equivalent, pair get a product of the counters (a i.m. number of combinations).
+    + For each equivalent, pair get a product of the counters
+    (a i.m. number of combinations).
     + Finally, calculate the sum of all products (i.m. sum of all of the combinations).
 
     See [C++ realization](

@@ -1,5 +1,6 @@
 """
-In previous homework task 4, you wrote a cache function that remembers other function output value.
+In previous homework task 4,
+you wrote a cache function that remembers other function output value.
 Modify it to be a parametrized decorator, so that the following code::
 ```
     @cache(times=3)

@@ -9,23 +9,23 @@ from homework_4.tasks.task_1 import NOT_EXIST, NOT_READABLE, read_magic_number
 
 
 @pytest.fixture()
-def no_permissions_file_path(tmp_path):
+def no_read_permission_file(tmp_path, monkeypatch):
     """
-    Returns temporary file path without permissions.
+    Returns temporary file path without permission to read.
     """
-    file_path = tmp_path / "tmp_dir"
-    file_path.mkdir(mode=0000)
-    yield file_path
-    file_path.rmdir()
+    tmp_txt = tmp_path / "tmp.txt"
+    tmp_txt.write_text("text")
+    monkeypatch.setattr("homework_4.tasks.task_1.R_OK", 1)
+    return tmp_txt
 
 
 # pylint: disable=redefined-outer-name
-def test_negative_not_readeble_case_for_read_magic_number(no_permissions_file_path):
+def test_negative_not_readeble_case_for_read_magic_number(no_read_permission_file):
     """
     Passes test if `ValueError` with `NOT_READABLE` message raises.
     """
     with pytest.raises(ValueError, match=NOT_READABLE):
-        read_magic_number(no_permissions_file_path)
+        read_magic_number(no_read_permission_file)
 
 
 def test_negative_not_exist_case_for_read_magic_number():
@@ -50,7 +50,8 @@ def test_negative_not_exist_case_for_read_magic_number():
 )
 def test_common_true_integers_cases_for_read_magic_number(content):
     """
-    Passes test if result of `read_magic_number` under `file.name` path with `content` is `True`.
+    Passes test if result of `read_magic_number`
+    under `file.name` path with `content` is `True`.
     """
     with NamedTemporaryFile(mode="tw", encoding="utf-8") as file:
         file.write(content)
@@ -70,7 +71,8 @@ def test_common_true_integers_cases_for_read_magic_number(content):
 )
 def test_common_true_dot_floats_cases_for_read_magic_number(content):
     """
-    Passes test if result of `read_magic_number` under `file.name` path with `content` is `True`.
+    Passes test if result of `read_magic_number`
+    under `file.name` path with `content` is `True`.
     """
     with NamedTemporaryFile(mode="tw", encoding="utf-8") as file:
         file.write(content)
@@ -90,7 +92,8 @@ def test_common_true_dot_floats_cases_for_read_magic_number(content):
 )
 def test_common_true_comma_floats_cases_for_read_magic_number(content):
     """
-    Passes test if result of `read_magic_number` under `file.name` path with `content` is `True`.
+    Passes test if result of `read_magic_number`
+    under `file.name` path with `content` is `True`.
     """
     with NamedTemporaryFile(mode="tw", encoding="utf-8") as file:
         file.write(content)
@@ -111,7 +114,8 @@ def test_common_true_comma_floats_cases_for_read_magic_number(content):
 )
 def test_common_false_integers_cases_for_read_magic_number(content):
     """
-    Passes test if result of `read_magic_number` under `file.name` path with `content` is `False`.
+    Passes test if result of `read_magic_number`
+    under `file.name` path with `content` is `False`.
     """
     with NamedTemporaryFile(mode="tw", encoding="utf-8") as file:
         file.write(content)
@@ -131,7 +135,8 @@ def test_common_false_integers_cases_for_read_magic_number(content):
 )
 def test_common_false_dot_floats_cases_for_read_magic_number(content):
     """
-    Passes test if result of `read_magic_number` under `file.name` path with `content` is `False`.
+    Passes test if result of `read_magic_number`
+    under `file.name` path with `content` is `False`.
     """
     with NamedTemporaryFile(mode="tw", encoding="utf-8") as file:
         file.write(content)
@@ -151,7 +156,8 @@ def test_common_false_dot_floats_cases_for_read_magic_number(content):
 )
 def test_common_false_comma_floats_cases_for_read_magic_number(content):
     """
-    Passes test if result of `read_magic_number` under `file.name` path with `content` is `False`.
+    Passes test if result of `read_magic_number`
+    under `file.name` path with `content` is `False`.
     """
     with NamedTemporaryFile(mode="tw", encoding="utf-8") as file:
         file.write(content)
@@ -170,7 +176,8 @@ def test_common_false_comma_floats_cases_for_read_magic_number(content):
 )
 def test_other_false_cases_for_read_magic_number(content):
     """
-    Passes test if result of `read_magic_number` under `file.name` path with `content` is `False`.
+    Passes test if result of `read_magic_number`
+    under `file.name` path with `content` is `False`.
     """
     with NamedTemporaryFile(mode="tw", encoding="utf-8") as file:
         file.write(content)

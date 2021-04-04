@@ -27,7 +27,7 @@ from homework_2.tasks.task_5 import custom_range
             string.ascii_lowercase,
             ("g", "p", -2),
             ["p", "n", "l", "j", "h"],
-            id="Common case: iterable is ascii_lowercase, start is 'g', end is 'p', step is -2.",
+            id="Common case: iterable is ascii_lowercase, start 'g', end 'p', step -2.",
         ),
     ],
 )

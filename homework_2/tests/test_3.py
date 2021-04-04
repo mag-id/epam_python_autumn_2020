@@ -18,7 +18,7 @@ from homework_2.tasks.task_3 import combinations
             [
                 [1],
             ],
-            id="Common case: [1] gives 1 combinations: [[1]]",
+            id="[1] gives 1 combinations: [[1]]",
         ),
         pytest.param(
             [
@@ -29,7 +29,7 @@ from homework_2.tasks.task_3 import combinations
             [
                 [1, 2, 3],
             ],
-            id="Common case: [1], [2], [3] gives 1 combinations: [[1, 2, 3]]",
+            id="[1], [2], [3] gives 1 combinations: [[1, 2, 3]]",
         ),
         pytest.param(
             [
@@ -42,7 +42,7 @@ from homework_2.tasks.task_3 import combinations
                 [2, 3],
                 [2, 4],
             ],
-            id="Common case: [1, 2], [3, 4] gives 4 combinations: [[1, 3], [1, 4], [2, 3], [2, 4]]",
+            id="[1, 2], [3, 4] gives 4 combinations: [[1, 3], [1, 4], [2, 3], [2, 4]]",
         ),
         pytest.param(
             [
@@ -79,7 +79,7 @@ from homework_2.tasks.task_3 import combinations
                 [3, 6, 8],
                 [3, 6, 9],
             ],
-            id="Common case: [1, 2, 3], [4, 5, 6], [7, 8, 9] gives 27 combinations.",
+            id="[1, 2, 3], [4, 5, 6], [7, 8, 9] gives 27 combinations.",
         ),
     ],
 )
@@ -97,7 +97,7 @@ def test_common_cases_for_combinations(args: List[List], expected_result: List[L
         pytest.param(
             [[]],
             [],
-            id="Emty list case: [] gives 1 combinations: [].",
+            id="[] gives 1 combinations: [].",
         ),
         pytest.param(
             [
@@ -105,7 +105,7 @@ def test_common_cases_for_combinations(args: List[List], expected_result: List[L
                 [],
             ],
             [],
-            id="Emty list case: [], [] gives 1 combinations: [].",
+            id="[], [] gives 1 combinations: [].",
         ),
         pytest.param(
             [
@@ -113,7 +113,7 @@ def test_common_cases_for_combinations(args: List[List], expected_result: List[L
                 [1, 2, 3],
             ],
             [],
-            id="Emty list case: [], [1, 2, 3] gives 1 combinations: [].",
+            id="[], [1, 2, 3] gives 1 combinations: [].",
         ),
         pytest.param(
             [
@@ -122,7 +122,7 @@ def test_common_cases_for_combinations(args: List[List], expected_result: List[L
                 [3],
             ],
             [],
-            id="Emty list case: [1, 2], [], [3] gives 1 combinations: [].",
+            id="[1, 2], [], [3] gives 1 combinations: [].",
         ),
     ],
 )
@@ -146,7 +146,7 @@ def test_empty_lists_for_combinations(args: List[List], expected_result: List[Li
                 [1, 3],
                 [1, 4],
             ],
-            id="Nonequal lists case: [1], [3, 4] gives 2 combinations: [[1, 3], [1, 4]].",
+            id="[1], [3, 4] gives 2 combinations: [[1, 3], [1, 4]].",
         ),
         pytest.param(
             [
@@ -157,7 +157,7 @@ def test_empty_lists_for_combinations(args: List[List], expected_result: List[Li
                 [1, 3],
                 [2, 3],
             ],
-            id="Nonequal lists case: [1, 2], [3] gives 2 combinations: [[1, 3], [2, 3]].",
+            id="[1, 2], [3] gives 2 combinations: [[1, 3], [2, 3]].",
         ),
         pytest.param(
             [[1, 2], [3], [4, 5, 6]],
@@ -169,7 +169,7 @@ def test_empty_lists_for_combinations(args: List[List], expected_result: List[Li
                 [2, 3, 5],
                 [2, 3, 6],
             ],
-            id="Nonequal lists case: [1, 2], [3], [4, 5, 6] gives 6 combinations.",
+            id="[1, 2], [3], [4, 5, 6] gives 6 combinations.",
         ),
     ],
 )

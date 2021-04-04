@@ -15,7 +15,8 @@ I_NUMBER = 6
 
 def test_positive_case_count_dots_on_i(monkeypatch):
     """
-    Passes test if `count_dots_on_i(URL)` result is equal to `I_NUMBER` according to `CONTENT`.
+    Passes test if `count_dots_on_i(URL)` result
+    is equal to `I_NUMBER` according to `CONTENT`.
     """
     mocked_urlopen = MagicMock()
     # https://stackoverflow.com/questions/38199008/python-returns-magicmock-object-instead-of-return-value

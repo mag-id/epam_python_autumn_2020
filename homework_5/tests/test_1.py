@@ -106,7 +106,9 @@ class TestTeacher:  # pylint: disable=R0903
 
     @staticmethod
     def test_create_homework():
-        """Passes test if `create_homework("some task", 1)` is instance of `Homework`."""
+        """
+        Passes test if `create_homework("some task", 1)` is instance of `Homework`.
+        """
         assert isinstance(
             Teacher("Last name", "First name").create_homework("some task", 1), Homework
         )
